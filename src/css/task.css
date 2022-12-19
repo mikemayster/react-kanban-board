@@ -1,0 +1,45 @@
+.wrapIcon {
+    align-items: center;
+    display: flex;
+}
+.secondaryDetails{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    color: #7d7d7d;
+}
+.draggableBox{
+    display: flex;
+    flex-direction: column;
+    padding: 0px 10px 0px 10px;
+    border-radius: 5px;
+    background: white;
+    user-select: none;
+    margin: 15px;
+    position: relative;
+}
+
+.task-container {
+    width: 100%;
+    min-height: 600px;
+    /*max-height: 600px;*/
+    overflow: hidden;
+    scroll-behavior: smooth;
+    padding: 4px;
+    border-radius: 15px;
+    /*font-size: 1.4em;*/
+    /*font-weight: 400;*/
+    /*font-style: italic;*/
+    transition: 1s;
+}
+
+.block2 {
+    width: 4%;
+    height: 10%;
+    position: absolute;
+    top: 5%;
+    left: 100%;
+    border-top-right-radius: 30%;
+    border-bottom-right-radius: 30%;
+}
