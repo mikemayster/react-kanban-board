@@ -1,11 +1,9 @@
 import { Button, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle } from "@material-ui/core";
 import React, { useState } from "react";
 import DeleteIcon from '@mui/icons-material/Delete';
-import { columnsFromBackend } from "../constants/KanbanData"
 
-function DeleteActionItemDialog({ actionItem, onClose, droppableId }) {
+function DeleteActionItemDialog({ actionItem, onClose, droppableId, setColumns, columns }) {
     const [deleting, setDeleting] = useState(false);
-    const [columns, setColumns] = useState(columnsFromBackend);
 
 
     return (
@@ -26,9 +24,19 @@ function DeleteActionItemDialog({ actionItem, onClose, droppableId }) {
                 <Button
                     onClick={async () => {
                         setDeleting(true);
-                        const array = columns[droppableId].items;
-                        const index = array.findIndex(key => key.id === actionItem.id);
-                        array.splice(index, 1)
+
+                        const index = columns[droppableId].items.findIndex((key) => key.id === actionItem.id);
+                        const column = columns[droppableId];
+                        const copiedItems = [...column.items];
+                        copiedItems.splice(index, 1);
+                        setColumns({
+                            ...columns,
+                            [droppableId]: {
+                                ...column,
+                                items: copiedItems
+                            }
+                        })
+
                         setDeleting(false);
                         onClose();
                     }}

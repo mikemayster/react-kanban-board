@@ -25,7 +25,7 @@ Please install them if you don't have them already.
 If you are using npm, run from the root of the repository:
 
 ```sh
-npm run install
+npm install --legacy-peer-deps
 ```
 
 ### Step 3 - Run an app

@@ -48,6 +48,7 @@ function ActionItemKanbanBoard() {
 
     return (
         <>
+
             <Grid container spacing={2}>
                 <DragDropContext onDragEnd={result => onDragEnd(result, columns, setColumns)}>
                     {Object.entries(columns).map(([id, column]) => {
@@ -57,6 +58,8 @@ function ActionItemKanbanBoard() {
                                     key={id}
                                     droppableId={id}
                                     column={column}
+                                    setColumns={setColumns}
+                                    columns={columns}
                                 />
                             </Grid>
                         )

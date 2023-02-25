@@ -1,5 +1,5 @@
 export const columnsFromBackend = {
-    ['toDo']: {
+    'toDo': {
         title: "To-do",
         items: [
             {
@@ -12,16 +12,16 @@ export const columnsFromBackend = {
                 priority: 'high',
                 start_date: new Date(),
                 due_date: new Date(),
-                owner: 'Mario Rossi',
+                owner: 'Mihai Maier',
                 open: true
             }
         ],
     },
-    ['doing']: {
+    'doing': {
         title: "Doing",
         items: [],
     },
-    ['done']: {
+    'done': {
         title: "Done",
         items: [],
     }

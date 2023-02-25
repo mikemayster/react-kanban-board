@@ -23,16 +23,29 @@
 .task-container {
     width: 100%;
     min-height: 600px;
-    /*max-height: 600px;*/
-    overflow: hidden;
+    max-height: 600px;
+    overflow-y: auto;
+    overflow-x: hidden;
     scroll-behavior: smooth;
     padding: 4px;
     border-radius: 15px;
-    /*font-size: 1.4em;*/
-    /*font-weight: 400;*/
-    /*font-style: italic;*/
     transition: 1s;
+    scrollbar-width: thin;
+    scrollbar-color: #006df9 #e4e4e4;
 }
+
+.task-container::-webkit-scrollbar {
+    width: 5px;
+  }
+  .task-container::-webkit-scrollbar-track {
+    background: #e4e4e4;
+  }
+  .task-container::-webkit-scrollbar-thumb {
+    background-color: #006df9;
+    border-radius: 20px;
+    border: 10px solid;
+    border-color: #006df9;
+  }
 
 .block2 {
     width: 4%;

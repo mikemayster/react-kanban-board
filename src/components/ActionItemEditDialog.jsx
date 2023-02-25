@@ -7,7 +7,6 @@ import '../css/task.css';
 import { AdapterDayjs } from '@mui/x-date-pickers/AdapterDayjs';
 import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { DatePicker } from '@mui/x-date-pickers/DatePicker';
-import { columnsFromBackend } from "../constants/KanbanData"
 
 const process = [
     { id: 1, name: "To Do", value: "toDo" },
@@ -29,9 +28,7 @@ const level = [
     { id: 4, name: "LOW", value: "low" }
 ];
 
-function ActionItemEditDialog({ actionItem, onClose, open, droppableId }) {
-
-    const [columns, setColumns] = useState(columnsFromBackend);
+function ActionItemEditDialog({ actionItem, onClose, open, droppableId, setColumns, columns }) {
 
     const [data, setData] = useState(
         {
@@ -92,19 +89,51 @@ function ActionItemEditDialog({ actionItem, onClose, open, droppableId }) {
                     noValidate
                     onSubmit={(e) => {
                         e.preventDefault();
-                        console.log(columns[data.process_stage].items)
-                        columns[data.process_stage].items.push({
-                            id: parseInt(data.id) + 1,
-                            category_color: 'red',
-                            category_name: data.category_name,
-                            issue: data.issue,
-                            process_stage: data.process_stage,
-                            status_stage: data.status_stage,
-                            priority: data.priority,
-                            start_date: data.start_date,
-                            due_date: data.due_date,
-                            owner: 'Mario Rossi'
-                        });
+                        const stage = data.process_stage;
+                        const column = columns[stage];
+                        const copiedItems = [...column.items];
+                        if (actionItem) {
+                            const newData = {
+                                id: data.id,
+                                category_color: 'red',
+                                category_name: data.category_name,
+                                issue: data.issue,
+                                process_stage: data.process_stage,
+                                status_stage: data.status_stage,
+                                priority: data.priority,
+                                start_date: data.start_date,
+                                due_date: data.due_date,
+                                owner: 'Mario Rossi'
+                            };
+
+                            const index = copiedItems.findIndex((item) => item.id === data.id);
+                            copiedItems[index] = newData;
+
+                        } else {
+                            const newData = {
+                                id: parseInt(data.id) + 1,
+                                category_color: 'red',
+                                category_name: data.category_name,
+                                issue: data.issue,
+                                process_stage: data.process_stage,
+                                status_stage: data.status_stage,
+                                priority: data.priority,
+                                start_date: data.start_date,
+                                due_date: data.due_date,
+                                owner: 'Mario Rossi'
+                            };
+
+                            copiedItems.push(newData);
+                        }
+
+                        setColumns({
+                            ...columns,
+                            [stage]: {
+                                ...column,
+                                items: copiedItems
+                            }
+                        })
+
                         handleClose();
                     }}
                 >

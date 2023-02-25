@@ -3,34 +3,29 @@ import Button from '@material-ui/core/Button';
 import { Typography } from '@mui/material';
 import TaskList from './TaskList';
 import React, { useState } from "react";
-import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
-import ExpandLessIcon from '@mui/icons-material/ExpandLess';
-import IconButton from "@material-ui/core/IconButton";
 import ActionItemEditDialog from "../ActionItemEditDialog";
 import Grid from "@material-ui/core/Grid";
+import { Divider, makeStyles } from '@material-ui/core';
 
-const scrollDown = (id) => {
-    const list = document.getElementsByClassName('task-container');
-    for (let item of list) {
-        if (item.getAttribute('data-rbd-droppable-id') == id) {
-            item.scrollTop += 300;
-        }
-    }
-}
+const useStyles = makeStyles((theme) => ({
+    container: {
+        background: '#FAFBFE',
+        padding: theme.spacing(1.5),
+        border: '1px solid #F4F4F4',
+    },
+    title: {
+        color: '#9499A6',
+        fontWeight: 600,
+        textTransform: 'uppercase',
+        fontSize: theme.spacing(2),
+    },
+}));
 
-const scrollUp = (id) => {
-    const list = document.getElementsByClassName('task-container');
-    for (let item of list) {
-        if (item.getAttribute('data-rbd-droppable-id') == id) {
-            item.scrollTop -= 300;
-        }
-    }
-}
-
-function KanbanColumn({ droppableId, column }) {
+function KanbanColumn({ droppableId, column, setColumns, columns }) {
 
     const [isEditOpen, setEditOpen] = useState(false);
     const [itemPendingEdit, setItemPendingEdit] = useState(undefined);
+    const classes = useStyles();
 
     return (
         <>
@@ -42,65 +37,48 @@ function KanbanColumn({ droppableId, column }) {
                     setEditOpen(false);
                 }}
                 droppableId={droppableId}
+                setColumns={setColumns}
+                columns={columns}
             />
 
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Typography
-                        align="center"
-                        component="h1"
-                        gutterBottom
-                        noWrap
-                        variant="h5"
-                    >
-                        {column.title}
-                    </Typography>
+            <Grid className={classes.container}>
+                <Grid container spacing={2} justifyContent="space-between" alignItems="center">
+                    <Grid item>
+                        <Typography align="center" component="h2" gutterBottom noWrap variant="body2" className={classes.title}>
+                            {column.title}
+                        </Typography>
+                    </Grid>
+
+                    <Grid item>
+                        <Button
+                            fullWidth
+                            startIcon={<AddIcon />}
+                            onClick={() => {
+                                setItemPendingEdit(undefined);
+                                setEditOpen(true);
+                            }}
+                            variant="text"
+                            color="primary"
+                        >
+                            Add Item
+                        </Button>
+                    </Grid>
+                    <Grid item xs={12}>
+                        <Divider style={{ marginBottom: 16 }} />
+                    </Grid>
                 </Grid>
-            </Grid>
 
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <Button fullWidth onClick={() => {
-                        setItemPendingEdit(undefined);
-                        setEditOpen(true);
-                    }}
-                        variant="outlined">
-                        <AddIcon /> Add Item
-                    </Button>
-                </Grid>
-            </Grid>
-
-
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <IconButton
-                        size="small"
-                        onClick={() => scrollUp(droppableId)}
-                    >
-                        <ExpandLessIcon />
-                    </IconButton>
-                </Grid>
-            </Grid>
-
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <TaskList
-                        droppableId={droppableId}
-                        items={column.items}
-                        setItemPendingEdit={setItemPendingEdit}
-                        setEditOpen={setEditOpen}
-                    />
-                </Grid>
-            </Grid>
-
-            <Grid container spacing={2}>
-                <Grid item xs={12}>
-                    <IconButton
-                        size="small"
-                        onClick={() => scrollDown(droppableId)}
-                    >
-                        <ExpandMoreIcon />
-                    </IconButton>
+                <Grid container spacing={2}>
+                    <Grid item xs={12}>
+                        <TaskList
+                            droppableId={droppableId}
+                            items={column.items}
+                            setItemPendingEdit={setItemPendingEdit}
+                            setEditOpen={setEditOpen}
+                            setColumns={setColumns}
+                            columns={columns}
+                        />
+                    </Grid>
                 </Grid>
             </Grid>
         </>

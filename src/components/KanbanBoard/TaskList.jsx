@@ -4,7 +4,7 @@ import '../../css/task.css';
 import React from "react";
 import { Box } from '@material-ui/core';
 
-function TaskList({ droppableId, items, setItemPendingEdit, setEditOpen }) {
+function TaskList({ droppableId, items, setItemPendingEdit, setEditOpen, setColumns, columns }) {
 
     return (
         <>
@@ -29,6 +29,8 @@ function TaskList({ droppableId, items, setItemPendingEdit, setEditOpen }) {
                                         setItemPendingEdit={setItemPendingEdit}
                                         setEditOpen={setEditOpen}
                                         droppableId={droppableId}
+                                        setColumns={setColumns}
+                                        columns={columns}
                                     />
                                 )
                             })}
