@@ -8,6 +8,8 @@
 - Edit task descriptions
 - Add sub-task
 
+:satellite: Live Demo: [Click me!](https://mikemayster.github.io/react-kanban-board/)
+
 ## Development setup 🛠
 
 Steps to locally setup development after cloning the project.
@@ -40,3 +42,10 @@ npm start
 ```
 
 Your browser should open up to a running app.
+
+### :rocket: Deploy
+
+1. Open `package.json` and at the homepage property add the value in this format: `https://{username}.github.io/{repo-name}`
+2. A predeploy property and a deploy property to the scripts object has been added.
+3. Run `npm run deploy` and push the React app to the GitHub repository
+4. Follow the deployment process on Github Actions
