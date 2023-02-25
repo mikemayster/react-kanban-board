@@ -74,8 +74,6 @@ function ActionItemEditDialog({ actionItem, onClose, open, droppableId, setColum
         );
     }, [actionItem]);
 
-    console.log(data);
-
     const handleClose = () => {
         onClose();
     };

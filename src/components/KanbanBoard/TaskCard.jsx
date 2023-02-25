@@ -79,11 +79,11 @@ const TaskCard = ({ item, index, setItemPendingEdit, setEditOpen, droppableId, s
                     return (
                         <Box
                             {...provided.draggableProps}
-                            {...provided.dragHandleProps}
                             ref={provided.innerRef}
+                            {...provided.dragHandleProps}
                             style={{
                                 ...provided.draggableProps.style,
-                                transform: snapshot.isDragging ? `rotate(-5deg) ${provided.draggableProps.style.transform}` : '',
+                                backgroundColor: snapshot.isDragging ? 'rgba(255, 59, 59, 0.15)' : 'white',
                             }}
                             className={classNames(classes.root, { [classes.dragging]: snapshot.isDragging })}
                         >
