@@ -10,6 +10,8 @@
 
 :satellite: Live Demo: [Click me!](https://mikemayster.github.io/react-kanban-board/)
 
+![Screenshot](kanban-image.jpg)
+
 ## Development setup 🛠
 
 Steps to locally setup development after cloning the project.
